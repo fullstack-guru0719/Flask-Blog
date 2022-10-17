@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import *
 
 app = Flask(__name__)
 
@@ -7,12 +7,30 @@ app = Flask(__name__)
 # def home(name):
 #     return "hello," + name
 
+@app.route('/admin')
+def admin():
+    return 'admin'
 
-def about():
-    return "This is about Page"
+
+@app.route('/librarion')
+def librariion():
+    return 'librarion'
 
 
-app.add_url_rule("/about", "about", about)
+@app.route('/student')
+def student():
+    return 'student'
+
+
+@app.route('/user/<name>')
+def user(name):
+    if name == 'admin':
+        return redirect(url_for('admin'))
+    if name == 'librarion':
+        return redirect(url_for('librarion'))
+    if name == 'student':
+        return redirect(url_for('student'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
